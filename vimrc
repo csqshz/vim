@@ -1,9 +1,9 @@
-set nu                                                                                                                                                   
+set nu
 set hlsearch
 hi Search term=standout ctermfg=0 ctermbg=11 guifg=Black guibg=Yellow
 hi ModeMsg ctermfg=LightGreen  " cscope 或者 ctags 搜索某变量定义时，列表出的文件名的配色
 set ts=4
-" set tags=tags             " 若当前目录中没有tags则到父目录中找
+" set tags=tags   			" 若当前目录中没有tags则到父目录中找
 " set autochdir
 
 set nocompatible              " be iMproved, required
@@ -36,7 +36,6 @@ Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 " Plugin 'ascenator/L9', {'name': 'newL9'}
 
 Plugin 'majutsushi/tagbar' "Tag bar"
-
 " 树型显示目录
 Plugin 'scrooloose/nerdtree'
 " 自动补全
@@ -60,27 +59,27 @@ filetype plugin indent on    " required
 
 " cscope: 建立数据库: cscope -Rbq;
 if has("cscope")
-    set csprg=/usr/bin/cscope
-    set csto=1
-    set cst
-    set nocsverb
-    " add any databse in current directory
-    if filereadable("cscope.out")
-        cs add cscope.out
-    endif
-    set csverb
+	set csprg=/usr/bin/cscope
+	set csto=1
+	set cst
+	set nocsverb
+	" add any databse in current directory
+	if filereadable("cscope.out")
+		cs add cscope.out
+	endif
+	set csverb
 
 endif
 
 " 如果是<C-@>s 表示ctrl+space+s
-nmap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>      " C符号出现的地方
-nmap <C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR>      " 定义的地方
-nmap <C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR>      " 调用这个函数的函数列表
-nmap <C-\>t :cs find t <C-R>=expand("<cword>")<CR><CR>      " 搜索字符串
-nmap <C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR>      " egrep 匹配
-nmap <C-\>f :cs find f <C-R>=expand("<cfile>")<CR><CR>      " 搜索文件
-nmap <C-\>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>    " 包含这个文件的文件列表
-nmap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>      " 被这个函数调用的函数列表
+nmap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>		" C符号出现的地方
+nmap <C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR>		" 定义的地方
+nmap <C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR>		" 调用这个函数的函数列表
+nmap <C-\>t :cs find t <C-R>=expand("<cword>")<CR><CR>		" 搜索字符串
+nmap <C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR>		" egrep 匹配
+nmap <C-\>f :cs find f <C-R>=expand("<cfile>")<CR><CR>		" 搜索文件
+nmap <C-\>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>	" 包含这个文件的文件列表
+nmap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>		" 被这个函数调用的函数列表
 
 " Tagbar
 "let g:tagbar_width=25
@@ -143,13 +142,13 @@ let g:ycm_use_ultisnips_completer = 1
 "let g:ycm_echo_current_diagnostic = 0
 let g:ycm_show_diagnostics_ui = 0   " 不设置此项，vim打开后最左侧会多出一列
 
-" 状态栏                                       
+" 状态栏
 set laststatus=2      " 总是显示状态栏
 highlight StatusLine cterm=bold ctermfg=yellow ctermbg=blue
 " 获取当前路径，将$HOME转化为~
 function! CurDir()  
-    let curdir = substitute(getcwd(), $HOME, "~", "g")  
-    return curdir  
+	let curdir = substitute(getcwd(), $HOME, "~", "g")  
+	return curdir  
 endfunction  
 
 " set statusline=[%n]\ %f%m%r%h\ \|\ \ pwd:\ %{CurDir()}\ \ \|%=\|\ %l,%c\ %p%%\ \|\ ascii=%b,hex=%b%{((&fenc==\"\")?\"\":\"\ \|\ \".&fenc)}\ \|\ %{$USER}\ @\ %{hostname()}\
@@ -160,4 +159,4 @@ set statusline=[%F]%y%r%m%*%=[Line:%l/%L,Column:%c][%p%%]
 " 设置第80列提示线
 "set cc=80
 
-set cursorline " 突出显示当前行 
+set cursorline " 突出显示当前行
