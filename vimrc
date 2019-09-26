@@ -1,10 +1,14 @@
 set nu
 set hlsearch
-hi Search term=standout ctermfg=0 ctermbg=11 guifg=Black guibg=Yellow
-hi ModeMsg ctermfg=LightGreen  " cscope 或者 ctags 搜索某变量定义时，列表出的文件名的配色
 set ts=4
 " set tags=tags   			" 若当前目录中没有tags则到父目录中找
 " set autochdir
+
+" only use mouse in normal model
+" set mouse=n
+
+hi Search term=standout ctermfg=0 ctermbg=11 guifg=Black guibg=Yellow
+hi ModeMsg ctermfg=LightGreen  " cscope 或者 ctags 搜索某变量定义时，列表出的文件名的配色
 
 set nocompatible              " be iMproved, required
 filetype off                  " required
@@ -12,11 +16,17 @@ filetype off                  " required
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
+
 " alternatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
 
 " let Vundle manage Vundle, 插件管理tool
 Plugin 'VundleVim/Vundle.vim'
+Plugin 'fatih/vim-go'
+
+" Vim-go默认是用ultisnips引擎插件
+Plugin 'SirVer/ultisnips'
+
 
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
@@ -27,7 +37,7 @@ Plugin 'tpope/vim-fugitive'
 " Git plugin not hosted on GitHub
 Plugin 'git://git.wincent.com/command-t.git'
 " git repos on your local machine (i.e. when working on your own plugin)
-Plugin 'file:///home/gmarik/path/to/plugin'
+"" Plugin 'file:///home/gmarik/path/to/plugin'
 " The sparkup vim script is in a subdirectory of this repo called vim.
 " Pass the path to set the runtimepath properly.
 Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
@@ -160,3 +170,52 @@ set statusline=[%F]%y%r%m%*%=[Line:%l/%L,Column:%c][%p%%]
 "set cc=80
 
 set cursorline " 突出显示当前行
+
+"gotags 光标在某变量或函数上，输入gd跳转。ctrl+o返回
+let g:tagbar_type_go = {
+    \ 'ctagstype' : 'go',
+    \ 'kinds'     : [
+        \ 'p:package',
+        \ 'i:imports:1',
+        \ 'c:constants',
+        \ 'v:variables',
+        \ 't:types',
+        \ 'n:interfaces',
+        \ 'w:fields',
+        \ 'e:embedded',
+        \ 'm:methods',
+        \ 'r:constructor',
+        \ 'f:functions'
+    \ ],
+    \ 'sro' : '.',
+    \ 'kind2scope' : {
+        \ 't' : 'ctype',
+        \ 'n' : 'ntype'
+    \ },
+    \ 'scope2kind' : {
+        \ 'ctype' : 't',
+        \ 'ntype' : 'n'
+    \ },
+    \ 'ctagsbin'  : 'gotags',
+    \ 'ctagsargs' : '-sort -silent'
+\ }
+" golang 的tagbar, 侧边栏函数变量列表
+nmap <F8> :TagbarToggle<CR>
+" golang 文件目录tree Ctrl+o 可以返回
+map <F7> :NERDTreeToggle<CR>
+
+" vim-airline 插件，管理状态栏
+"Bundle 'bling/vim-airline'
+set laststatus=2  "打开状态栏
+
+" 多文本编辑
+" F11和F12键来进行前后buffer的跳转，比较方便。如果要关闭某个buffer的话，可以使用命令:MBEbd [num]，如果只是输入:MBEbd是关闭当前buffer，如果后面跟有buffer的数字标号，则关闭指定的buffer。
+Bundle 'fholgado/minibufexpl.vim'
+let g:miniBufExplMapWindowNavVim = 1
+let g:miniBufExplMapWindowNavArrows = 1
+let g:miniBufExplMapCTabSwitchBufs = 1
+let g:miniBufExplModSelTarget = 1
+let g:miniBufExplMoreThanOne=0
+
+map <F11> :MBEbp<CR>
+map <F12> :MBEbn<CR>
