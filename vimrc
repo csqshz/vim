@@ -1,6 +1,8 @@
 set nu
 set hlsearch
 set ts=4
+set softtabstop=4
+set shiftwidth=4
 " set tags=tags   			" 若当前目录中没有tags则到父目录中找
 " set autochdir
 
