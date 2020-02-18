@@ -9,7 +9,7 @@ set shiftwidth=4
 " only use mouse in normal model
 " set mouse=n
 
-hi Search term=standout ctermfg=0 ctermbg=11 guifg=Black guibg=Yellow
+hi Search term=standout ctermfg=0 ctermbg=3 guifg=Black guibg=Yellow
 hi ModeMsg ctermfg=LightGreen  " cscope 或者 ctags 搜索某变量定义时，列表出的文件名的配色
 
 set nocompatible              " be iMproved, required
